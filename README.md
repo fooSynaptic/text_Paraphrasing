@@ -127,7 +127,7 @@ topic 31th
 40	有钱没钱回家过年，不用考虑这爸妈为家人带什么礼物，因为啊回家就是最好的礼物，家销售逐行胡彦锁恭祝大家新春大吉吉祥如意。
 ```
 
-Theory finished(tierd
+Theory finished(tired
 
 - *Project architecture*
 ...etc.
