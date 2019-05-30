@@ -3,13 +3,13 @@ This project implemented the matrix decomposition targetting the **re-paraphrase
 **Text feature decomposition for text paraphrase-constriction**
 
 - **Theory**
+
     While our target is splitting our raw sentences to semantic paraphrases or specfic topic focusing sentences. The first thing we'd like 
 to do is enmerate all the topic with raw sentences. The un-supervise techonology maybe the only choice--and i will prove it suits this task appropriatly. 
 
 **How to enumerate the topics from the raw text?**
-    How to enumerate the topics, this is'nt something trivial. Basically, we dont know how many topics in a stage of broadcaste, so we inplemented
-the un-superwised algorithm, which is matrix decomposition here. But we also do'nt know how good is our result-- is the sample topic are semantic paraphrase
-or something bullshit. So i will introduce two metric about the evaluation about our algorithm. Actually, they do a great help in my empirical experiments.
+
+How to enumerate the topics, this is'nt something trivial. Basically, we dont know how many topics in a stage of broadcaste, so we inplemented the un-superwised algorithm, which is matrix decomposition here. But we also do'nt know how good is our result--is the sample topic are semantic paraphrase or something bullshit. So i will introduce two metric about the evaluation about our algorithm. Actually, they do a great help in my empirical experiments.
     - first, the average map rate, it denote the how close is the topic freqence words with each sentences(So its average).
     - second, the continuity rate, this metric reveal the how good each topic is close to a semantic sentences(context-sensitive so its readable).
 ```
@@ -27,13 +27,12 @@ Topic #8: 感觉 小时 之前 问题 希望 提到 双方 孩子 头发 资金
 Topic #9: 当中 过程 对方 诚实 能够 如果说 聊天 打电话 欢迎 开心
 Topic #10: 之前 里面 不要 经验 出来 夜话 兰山 留言 觉得 半年
 why good?: we have ADs, jobs, broadcast channel intros, school stuff and marriage stuff seperated.
+
+
 ```
 
 **How to find the best topics number?**
-    Topic number are like centroids, for we are doing the classfication according the topics. As I said the number of topics from stages vary.
-It's not a puzzle, and we donot have some prior knowledge to set this number. The only approach is expriment, or grid search to find the 
-best centroid number. And the evalate metric are the two mention before: average map rate and continuity rate. i will present the empirical 
-experimental below:
+Topic number are like centroids, for we are doing the classfication according the topics. As I said the number of topics from stages vary. It's not a puzzle, and we donot have some prior knowledge to set this number. The only approach is expriment, or grid search to find the best centroid number. And the evalate metric are the two mention before: average map rate and continuity rate. i will present the empirical experimental below:
 ```
 #I denote the topic number, count rate and map rate explained above
 I:10 {'count rate': 0.24071122646442536, 'map rate': 0.09038461538461587} 0.3311
@@ -82,9 +81,7 @@ The global optimal parameter.....
 ```
 
 **how to re-parapherase?**
-    Our target is to order the sentences into context-sensible groups. What is groups, the topics, but how to gurantee the context-sensible?
-The answer is continuity. Actually we can pick the highest continuity topic from each topic number-from grid search. I will present the demo
-directly:
+Our target is to order the sentences into context-sensible groups. What is groups, the topics, but how to gurantee the context-sensible? The answer is continuity. Actually we can pick the highest continuity topic from each topic number-from grid search. I will present the demo directly:
 ```
 re-parapherase with most high continuity(id before sentence denote time info):
 topic number: 25
@@ -125,15 +122,26 @@ topic 31th
 36	一切就等着这个数着日子，到了以后，赶紧上车回家，能去见见父母跟姐妹们团圆一下，或是在兰州上班的这个河南焦作人不是年年都能回家很高兴，几年都没见面，然后两三年健身运
 38	我是静安静静平安的青岛工作呢，转车过来的啊，怎么说呢，回家过年嘛，肯定是很激动了，一直很激动啊，各种准备，没想到的东西尽量带的能带多少带多少春节过年，大家都一起回家吗，这个新建就是不一样
 40	有钱没钱回家过年，不用考虑这爸妈为家人带什么礼物，因为啊回家就是最好的礼物，家销售逐行胡彦锁恭祝大家新春大吉吉祥如意。
+
+And one of the most useful implementation is the ADs detection:
+3	讲文明，树新风公益广告
+8	本公益广告由甘肃省文明、磐安住商新闻出版广电局，登录人民广播电台联合制作播出
+10	九七分，兰州综合广播讲文明树新风公益广告
+14	人民阳泉从点滴做起事结束，文明养犬人
+18	九积分兰州综合广播讲文明树新风公益广告
+23	徐文明用语文明出行
+24	秦文明，细
+27	九、提升兰州综合广播讲文明树新风公益广告
 ```
 
-Theory finished(tierd
+Theory finished(tired
 
 - *Project architecture*
 ...etc.
 
 
 **TODO:**
+
 - ASR improvemental for better corpus.
 - Token embedding with more semantic vocabulary.
 
