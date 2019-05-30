@@ -119,7 +119,7 @@ def infer(res, lda_topics):
 
 
 
-def summarize(texts,n):
+def parapherasing(texts,n, mode = 'demo'):
     #get text as a list
     #return a sentence list
 
@@ -128,8 +128,11 @@ def summarize(texts,n):
     #sentences = [x.strip() for x in texts.split('\n')]
     #print(type(sentences), len(sentences))
     global corpus
-    path= '/Users/ajmd/code/nlp_project/text_multip_class/data/9719_20190128_2300_channel_0.txt'
-    corpus = [x['text'] for x in json.loads(open(path).read())]
+    if mode == 'demo':    
+        path= '/Users/ajmd/code/nlp_project/text_multip_class/data/9719_20190128_2300_channel_0.txt'
+        corpus = [x['text'] for x in json.loads(open(path).read())]
+    else:
+        corpus = [x.strip() for x in texts.split('\n')]
 
     sents = [re.sub(r'[0-9 a-z]', '', text) for text in corpus]
     sents = [' '.join(cut(x)) for x in sents]
@@ -138,22 +141,26 @@ def summarize(texts,n):
     vocabs = set()
     for text in sents: vocabs.update(text.split())
 
-    if os.path.exists('vector.pkl'): 
+    if os.path.exists('vector.pkl'):
         feature_M = vectorizer.transform(sents).toarray()
     else:
         feature_M = vectorizer.fit_transform(sents).toarray()
         joblib.dump(vectorizer, 'vector.pkl')
 
-    #decomposition 
-    _, _, _, res = factorizer(feature_M, 30, vectorizer.get_feature_names(), 10, vocabs, factor = "NMF")
+    #decomposition
+    if not len(sents) > 30:
+        n_components = 2
+    else:
+        n_components = 30
+    _, _, _, res = factorizer(feature_M, n_components, vectorizer.get_feature_names(), 10, vocabs, factor = "NMF")
     return '\n'.join(res)
     
 
 
 
     
-
-app = Flask(__name__)
+ 
+app = Flask(__name__) 
 
 @app.route("/")
 def home():
@@ -162,9 +169,9 @@ def home():
 @app.route('/submit', methods=['POST'])
 def submit():
     text1 = request.form['text']
-    text2 = summarize(text1, 1)
+    text2 = parapherasing(text1, 1, mode = 1)
     return render_template('home.html', text1=text1, text2=text2)
-
+ 
 @app.route('/hiw')
 def hiw():
 	return render_template('hiw.html')
