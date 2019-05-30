@@ -24,16 +24,19 @@ from collections import Counter
 
 from collections import defaultdict
 
-stopwords = [x.strip() for x in open('/Users/ajmd/Desktop/stopwords.txt')\
+Vector_path = 'vector.pkl
+
+
+stopwords = [x.strip() for x in open('path/to/your/stopwords')\
       .readlines()]
 
-if not os.path.exists('vector.pkl'):
+if not os.path.exists(Vector_path):
     vectorizer = TfidfVectorizer(max_df=0.95, min_df=2,
                                 max_features=3000,
                                 stop_words=stopwords)
 else:
     from sklearn.externals import joblib
-    vectorizer = joblib.load('vector.pkl')
+    vectorizer = joblib.load(Vector_path)
 
 
 def factorizer(matrix, n_components, feature_names, n_top_words, tokens, factor = "LDA"):
@@ -141,11 +144,11 @@ def parapherasing(texts,n, mode = 'demo'):
     vocabs = set()
     for text in sents: vocabs.update(text.split())
 
-    if os.path.exists('vector.pkl'):
+    if os.path.exists(Vector_path'):
         feature_M = vectorizer.transform(sents).toarray()
     else:
         feature_M = vectorizer.fit_transform(sents).toarray()
-        joblib.dump(vectorizer, 'vector.pkl')
+        joblib.dump(vectorizer, Vector_path)
 
     #decomposition
     if not len(sents) > 30:
@@ -158,7 +161,7 @@ def parapherasing(texts,n, mode = 'demo'):
 
 
 
-    
+ #bild web  
  
 app = Flask(__name__) 
 
@@ -171,18 +174,11 @@ def submit():
     text1 = request.form['text']
     text2 = parapherasing(text1, 1, mode = 1)
     return render_template('home.html', text1=text1, text2=text2)
- 
-@app.route('/hiw')
-def hiw():
-	return render_template('hiw.html')
 
-@app.route('/contact')
-def contact():
-	return render_template('contact.html')
-
+		      
 @app.route("/login")
 def login():
 	return render_template('login.html')
 
 if __name__ == '__main__':
-	app.run(debug=True, port = 5000)
+	app.run()
