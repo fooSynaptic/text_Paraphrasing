@@ -9,9 +9,7 @@ to do is enmerate all the topic with raw sentences. The un-supervise techonology
 
 **How to enumerate the topics from the raw text?**
 
-    How to enumerate the topics, this is'nt something trivial. Basically, we dont know how many topics in a stage of broadcaste, so we inplemented
-the un-superwised algorithm, which is matrix decomposition here. But we also do'nt know how good is our result-- is the sample topic are semantic paraphrase
-or something bullshit. So i will introduce two metric about the evaluation about our algorithm. Actually, they do a great help in my empirical experiments.
+How to enumerate the topics, this is'nt something trivial. Basically, we dont know how many topics in a stage of broadcaste, so we inplemented the un-superwised algorithm, which is matrix decomposition here. But we also do'nt know how good is our result--is the sample topic are semantic paraphrase or something bullshit. So i will introduce two metric about the evaluation about our algorithm. Actually, they do a great help in my empirical experiments.
     - first, the average map rate, it denote the how close is the topic freqence words with each sentences(So its average).
     - second, the continuity rate, this metric reveal the how good each topic is close to a semantic sentences(context-sensitive so its readable).
 ```
@@ -34,11 +32,7 @@ why good?: we have ADs, jobs, broadcast channel intros, school stuff and marriag
 ```
 
 **How to find the best topics number?**
-
-    Topic number are like centroids, for we are doing the classfication according the topics. As I said the number of topics from stages vary.
-It's not a puzzle, and we donot have some prior knowledge to set this number. The only approach is expriment, or grid search to find the 
-best centroid number. And the evalate metric are the two mention before: average map rate and continuity rate. i will present the empirical 
-experimental below:
+Topic number are like centroids, for we are doing the classfication according the topics. As I said the number of topics from stages vary. It's not a puzzle, and we donot have some prior knowledge to set this number. The only approach is expriment, or grid search to find the best centroid number. And the evalate metric are the two mention before: average map rate and continuity rate. i will present the empirical experimental below:
 ```
 #I denote the topic number, count rate and map rate explained above
 I:10 {'count rate': 0.24071122646442536, 'map rate': 0.09038461538461587} 0.3311
@@ -87,10 +81,7 @@ The global optimal parameter.....
 ```
 
 **how to re-parapherase?**
-
-    Our target is to order the sentences into context-sensible groups. What is groups, the topics, but how to gurantee the context-sensible?
-The answer is continuity. Actually we can pick the highest continuity topic from each topic number-from grid search. I will present the demo
-directly:
+Our target is to order the sentences into context-sensible groups. What is groups, the topics, but how to gurantee the context-sensible? The answer is continuity. Actually we can pick the highest continuity topic from each topic number-from grid search. I will present the demo directly:
 ```
 re-parapherase with most high continuity(id before sentence denote time info):
 topic number: 25
