@@ -3,10 +3,12 @@ This project implemented the matrix decomposition targetting the **re-paraphrase
 **Text feature decomposition for text paraphrase-constriction**
 
 - **Theory**
+
     While our target is splitting our raw sentences to semantic paraphrases or specfic topic focusing sentences. The first thing we'd like 
 to do is enmerate all the topic with raw sentences. The un-supervise techonology maybe the only choice--and i will prove it suits this task appropriatly. 
 
 **How to enumerate the topics from the raw text?**
+
     How to enumerate the topics, this is'nt something trivial. Basically, we dont know how many topics in a stage of broadcaste, so we inplemented
 the un-superwised algorithm, which is matrix decomposition here. But we also do'nt know how good is our result-- is the sample topic are semantic paraphrase
 or something bullshit. So i will introduce two metric about the evaluation about our algorithm. Actually, they do a great help in my empirical experiments.
@@ -32,6 +34,7 @@ why good?: we have ADs, jobs, broadcast channel intros, school stuff and marriag
 ```
 
 **How to find the best topics number?**
+
     Topic number are like centroids, for we are doing the classfication according the topics. As I said the number of topics from stages vary.
 It's not a puzzle, and we donot have some prior knowledge to set this number. The only approach is expriment, or grid search to find the 
 best centroid number. And the evalate metric are the two mention before: average map rate and continuity rate. i will present the empirical 
@@ -84,6 +87,7 @@ The global optimal parameter.....
 ```
 
 **how to re-parapherase?**
+
     Our target is to order the sentences into context-sensible groups. What is groups, the topics, but how to gurantee the context-sensible?
 The answer is continuity. Actually we can pick the highest continuity topic from each topic number-from grid search. I will present the demo
 directly:
@@ -146,6 +150,7 @@ Theory finished(tired
 
 
 **TODO:**
+
 - ASR improvemental for better corpus.
 - Token embedding with more semantic vocabulary.
 
