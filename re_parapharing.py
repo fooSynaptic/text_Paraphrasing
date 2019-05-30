@@ -24,7 +24,7 @@ from collections import Counter
 
 from collections import defaultdict
 
-Vector_path = 'vector.pkl
+Vector_path = 'vector.pkl'
 
 
 stopwords = [x.strip() for x in open('path/to/your/stopwords')\
