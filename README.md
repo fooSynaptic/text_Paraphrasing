@@ -5,7 +5,7 @@ This project implemented the matrix decomposition targetting the **re-paraphrase
 - **Theory**
 
     While our target is splitting our raw sentences to semantic paraphrases or specfic topic focusing sentences. The first thing we'd like 
-to do is enmerate all the topic with raw sentences. The un-supervise techonology maybe the only choice--and i will prove it suits this task appropriatly. 
+to do is enumerate all the topic with raw sentences. The un-supervise techonology maybe the only choice--and i will prove it suits this task well. 
 
 **How to enumerate the topics from the raw text?**
 
