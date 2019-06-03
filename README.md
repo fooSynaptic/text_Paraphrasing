@@ -148,5 +148,5 @@ Theory finished(tired
 
 
 **server demo**
-
+![avatar](../server.png)
 
