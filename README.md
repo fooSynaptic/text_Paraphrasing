@@ -148,5 +148,5 @@ Theory finished(tired
 
 
 **server demo**
-![avatar](../server.png)
+![avatar](https://github.com/fooSynaptic/text_Paraphrasing/blob/master/demo.png)
 
