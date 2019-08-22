@@ -1,5 +1,5 @@
 from flask import Flask,render_template,request
-from nltk.tokenize import word_tokenize,sent_tokenize
+from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from string import punctuation
 from flask import url_for
@@ -21,13 +21,15 @@ import os
 import random
 import pandas as pd
 from collections import Counter
+from time import sleep
+import json
 
 from collections import defaultdict
 
 Vector_path = 'vector.pkl'
 
 
-stopwords = [x.strip() for x in open('path/to/your/stopwords')\
+stopwords = [x.strip() for x in open('path/to/your/own/stopwords.txt')\
       .readlines()]
 
 if not os.path.exists(Vector_path):
@@ -122,20 +124,18 @@ def infer(res, lda_topics):
 
 
 
-def parapherasing(texts,n, mode = 'demo'):
+def parapherasing(texts,n, mode = 'demo', sent_tokenize = '。'):
     #get text as a list
     #return a sentence list
 
     # get feature matrix
-    #global sentences
-    #sentences = [x.strip() for x in texts.split('\n')]
-    #print(type(sentences), len(sentences))
     global corpus
-    if mode == 'demo':    
-        path= '/Users/ajmd/code/nlp_project/text_multip_class/data/9719_20190128_2300_channel_0.txt'
+    if mode == 'demo':
+        #preapred by yourself
+        path = 'your_prepared_text.txt'
         corpus = [x['text'] for x in json.loads(open(path).read())]
     else:
-        corpus = [x.strip() for x in texts.split('\n')]
+        corpus = [x.strip() for x in texts.split(sent_tokenize)]
 
     sents = [re.sub(r'[0-9 a-z]', '', text) for text in corpus]
     sents = [' '.join(cut(x)) for x in sents]
@@ -144,7 +144,7 @@ def parapherasing(texts,n, mode = 'demo'):
     vocabs = set()
     for text in sents: vocabs.update(text.split())
 
-    if os.path.exists(Vector_path'):
+    if os.path.exists(Vector_path):
         feature_M = vectorizer.transform(sents).toarray()
     else:
         feature_M = vectorizer.fit_transform(sents).toarray()
@@ -165,20 +165,38 @@ def parapherasing(texts,n, mode = 'demo'):
  
 app = Flask(__name__) 
 
+query = []
+response = ""
+
+
 @app.route("/")
 def home():
 	return render_template('home.html')
 
-@app.route('/submit', methods=['POST'])
-def submit():
-    text1 = request.form['text']
-    text2 = parapherasing(text1, 1, mode = 1)
-    return render_template('home.html', text1=text1, text2=text2)
 
-		      
+
+@app.route('/answer', methods=['POST'])
+def answer():
+    #text1 = request.form['passage']
+    #text2 = parapherasing(text1, 1, mode = 1)
+    #return render_template('home.html', text1=text1, text2=text2)
+    passage = request.json['passage']
+    question = request.json['question']
+    text2 = parapherasing(passage, 1, mode = 1)
+    global query, response
+
+    response = text2
+    print("received response: {}".format(response))
+    Final_response = {"answer": response}
+    return json.dumps(Final_response)
+    
+
+
+'''	      
 @app.route("/login")
 def login():
 	return render_template('login.html')
+'''
 
 if __name__ == '__main__':
-	app.run()
+	app.run(debug=True)
