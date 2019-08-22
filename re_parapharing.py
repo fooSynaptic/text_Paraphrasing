@@ -165,10 +165,6 @@ def parapherasing(texts,n, mode = 'demo', sent_tokenize = '。'):
  
 app = Flask(__name__) 
 
-query = []
-response = ""
-
-
 @app.route("/")
 def home():
 	return render_template('home.html')
@@ -183,7 +179,6 @@ def answer():
     passage = request.json['passage']
     question = request.json['question']
     text2 = parapherasing(passage, 1, mode = 1)
-    global query, response
 
     response = text2
     print("received response: {}".format(response))
