@@ -148,5 +148,6 @@ Theory finished(tired
 
 
 **server demo**
+
 ![server](https://github.com/fooSynaptic/text_Paraphrasing/blob/master/demo.png)
 
