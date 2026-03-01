@@ -5,7 +5,7 @@
 
 A text re-structuring and paraphrasing system using matrix decomposition (NMF/LDA) for topic modeling and sentence clustering.
 
-## 📖 Overview
+## <img src=".github/icons/book.svg" width="16" height="16" alt="book"> Overview
 
 This project implements an unsupervised approach to text paraphrasing and restructuring. It uses matrix decomposition techniques to:
 
@@ -13,7 +13,7 @@ This project implements an unsupervised approach to text paraphrasing and restru
 2. **Evaluate topic quality** using custom metrics (average map rate and continuity rate)
 3. **Re-structure text** into context-sensitive groups
 
-## 🚀 Quick Start
+## <img src=".github/icons/rocket.svg" width="16" height="16" alt="rocket"> Quick Start
 
 ### Installation
 
@@ -37,7 +37,7 @@ python re_paraphrasing.py
 
 Then open your browser to `http://localhost:5000`
 
-## 📁 Project Structure
+## <img src=".github/icons/folder.svg" width="16" height="16" alt="folder"> Project Structure
 
 ```
 text_Paraphrasing/
@@ -79,7 +79,7 @@ Score = Average Map Rate + Continuity Rate
 
 Groups sentences by topic and orders them by continuity to create readable, context-sensible groups.
 
-## 📊 Example Output
+## <img src=".github/icons/chart.svg" width="16" height="16" alt="chart"> Example Output
 
 ```
 Topic #4: 愿意 准备 焦虑 到底 孩子 知道 手机 不行 我要 辞职
@@ -156,7 +156,7 @@ For each document:
 3. Group documents by topic
 4. Calculate continuity: average adjacency of documents in same topic
 
-## ⚠️ Configuration
+## <img src=".github/icons/warning.svg" width="16" height="16" alt="warning"> Configuration
 
 Update the stopwords path in `re_paraphrasing.py`:
 
@@ -164,7 +164,7 @@ Update the stopwords path in `re_paraphrasing.py`:
 STOPWORDS_PATH = 'path/to/your/stopwords.txt'
 ```
 
-## 🔧 Hyperparameters
+## <img src=".github/icons/wrench.svg" width="16" height="16" alt="wrench"> Hyperparameters
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
@@ -174,7 +174,7 @@ STOPWORDS_PATH = 'path/to/your/stopwords.txt'
 | `n_components` | 30 | Number of topics (auto-adjusted for small texts) |
 | `n_top_words` | 10 | Number of words per topic |
 
-## 📚 References
+## <img src=".github/icons/book.svg" width="16" height="16" alt="book"> References
 
 - [Non-negative Matrix Factorization](https://en.wikipedia.org/wiki/Non-negative_matrix_factorization)
 - [Latent Dirichlet Allocation](https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation)
@@ -187,6 +187,6 @@ MIT License
 
 Contributions are welcome! Please feel free to submit issues and pull requests.
 
-## 🖼️ Demo
+## <img src=".github/icons/image.svg" width="16" height="16" alt="image"> Demo
 
 ![Server Demo](demo.png)
